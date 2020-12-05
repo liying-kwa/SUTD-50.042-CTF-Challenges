@@ -17,4 +17,6 @@ print()
 print("Look at EmojiHint3")
 print(istd_course_string)
 	
-
+print("The encoded message is tentimesten")
+print("input 100 to telegram bot")
+print("qrcode gives flag: ctf{red_team_has_the_flag}")
