@@ -1,5 +1,24 @@
 AITSLFQGZO NEF1WVSYO2 BN8K 9Z 3X PLVW XJ The Knight's Substitution RH YT HM IC MU UD ER Y35YM1
 
+A DI TS LF QG ZO NE F1 WV SY 
+
+
+=== Bolded Words ===
+The Knight's Substitution
+180 bits
+101010011010001100101100000100101111011101101001110011111010001110100100000000110011110011100000101001111101011100010111001111101001101001111010011101011110100110100111011111101110
+
+
+Y35TM1
+48 bits
+0b010110010011001100110101010110010100110100110001
+int representation: 98076473249073
+Shift right by 12 : 23944451476
+binary repr (48 bits): 
+0b000000000000010110010011001100110101010110010100
+Using 23944451476 as they key, I was not able to decrypt the image. Maybe it's because this is not a 49 bit key.
+
+
 How many stations does Downtown line Stage 2 serve?
 Ans: 12 
 
@@ -10,3 +29,4 @@ Ans: 12
 B5BB5BB55BB555555B555B55B’
 
 PRESENT to unencrypt the redacted image to obtain the flag within.
+key is either 80 or 128 bits
