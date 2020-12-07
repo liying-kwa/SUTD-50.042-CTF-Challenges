@@ -1,0 +1,42 @@
+
+
+1. Frequency analysis on encrypted english RSA private key to get english RSA private key.
+
+- Substitutions shown in image substitutions.jpg
+- English RSA private key is as shown:
+
+####################
+rue jilt rain crew use hog ram lois rate cake arm hit par otis ante deny few hum pry meet goad dawn hank home own meld argo buoy use hose rep meld cub dade fay he os gate reid dawn flow hue pry lair dad chub hand his par name dan come flow hood rue gash golf crew hand hen ply meek rare cake lea ha ram otto reid dade lap hey ply loge cub crew halo has rep gash did cave flub holt pry lake did come lam huff per lois aqua cave flow her rue gash rays cake fat huge rue gate day cave flow i pry gwen ames deny bash him per gwen des cake barn hat rep otis ammo chub pet hat rue nair cut cake hank hut ply loge ammo coat us hove rob gash gist cave halt hose rep nair real deny barn haw ply name dan dawn arm hal rue otis cut crew pew hap per hole del chub hang hub rue otto glad come law horn rue otis cub cake foal ham rob nair rain deny hand hem rep meek goad come are holm pry holm coy come are he per jill argo cake flow hone pry gust reek come ding hugh rue lois rate come per hoe pry lois coy cave law her own gush ammo deny flub hulk ply meet goes cake pep hint os lain glow deny halt huh rep meld argo buoy hang hem rep holm reed cake per hoof os meet gist dade lea honk rob nail coy dawn dine ha os gush real dawn carl hop pry holt dan chub care han rob meek dan dade cant hour own jill dad cave dint hut par loge cut coat dint her os otto reed buoy van hob pry holm dan dade arm hut os ouch arch crew lam howl per hole amos crew base hem ram lois rate deny arm hire own five glum buoy are has own lola ante buoy bask hit ply lake ammo chub care hulk rob gush army crew fay holt pry hole reid dawn dime hem ram nair ammo cave us huff rep gust cup chub flue honk pry otis cub dawn fay howe ply ouch ames coat foam guy ram jilt ante dade lay hug own loge dad come fee ha os meld amos deny law hire os gush amos dade pew hem rob meet reek come flow hill per ouch aqua chub per hen par flak ammo coat foal hiss own flag glow buoy foal hoot per holt army chub flub ha ram gate goad cake flue ho pry five ante dawn fed hull own jill day dawn card hub per jill glad dawn hank he ply meek glum cave pep holt
+####################
+
+
+2. Convert english private key back to private key
+- Full code can be seen in solver.py
+- Use Crypto.Util.RFC1751.english_to_bytes to get private_key.d in bytes
+- Decode in utf-8 to get private_key.d in string
+- private_key.d is actually an integer and is the number d in the RSA protocol
+- private_key.d: 9470644766731066291591895766899317980455778171230179880855443945288558149129694347321280697972244601690271092833558952183656280491341118914628095290956532881502791133429843198946114436812029357875950248858061990363623307396899615255990118618870994377265033534050233418181452785778967353275640224412119839476813110524992977980963737713340760729488008740023586875385366187057636140427892603478409770466534570690997621733126543667390711025002216950586459136798219613353398723685124387242385459018136499048806455726816045160079292510212736387785810399633232091487110640875339938206166184650158159140686483421898347252313
+- n and e can be found by importing from public key file and using the .n and .e attribute
+- Construct the RSA private key using RSA.construct and (n, e, d)
+- Use OAEP to decrypt encrypted_message1.bin to get the AES key
+
+
+3. Brute force for password
+
+- Password is random word in book.txt plus salt
+- Word is salted such that there is a random string.printable character added to front and back of the word. i.e. ?<word>? where ? is a string.printable character
+- Brute force code can be seen in solver.py
+- ANSWER: kmusic!
+- The word from the book is the password without the first and last character, i.e. music
+
+
+4. Get IV by MD5 hashing the word from the book
+- MD5 hash 'music'
+- Hashing code can be seen in solver.py
+- ANSWER: 18d6769919266cd0bd6cd78aa405d5d0
+
+
+5. Use AES key and IV to decrypt encrypted_message2.bin to get flag
+- Decryption code can be seen in solver.py
+- AES key and IV must both be in bytes
+- ANSWER: flag={Mice First!}
