@@ -1,0 +1,13 @@
+The first message to decode is: IEEOMPUKSOATWUYEEYOMHSHHRLSEYM
+We are also given a number: 236514
+
+After some consideration, we realised that the encrypted message could be from a transposition cipher encryption.
+Going to a transposition cipher decoder tool, https://www.dcode.fr/vigenere-cipher, we could obtain the first message
+by using 236514 as the key.
+
+First decoded message: HIPLEASEUSETHEKEYWHOSYOURMOMMY
+
+Hence, it seems as if we have obtained another key: WHOSYOURMOMMY
+
+The next encrypted message that we obtained (in string.printable) was -> :OW+iW-b&VQ6$(HUcqhepd8fficffcrgeof8jfio88pp8ok6gd4
+
