@@ -1,0 +1,30 @@
+After logging in, entering any password gives an error = H(entered password) XOR H(actual password) in the console, with MD5 as the hash function
+Entered password = abcdefghij
+H(entered password) = a925576942e94b2ef57a066101b48876
+Error returned = f6689b52184e2ef8e8f921bfb93647ef
+
+Rearraging, Error XOR H(entered password) = H(actual password), which results in
+5f4dcc3b5aa765d61d8327deb882cf99
+
+Searching through an online database of hashes https://hashes.com/en/decrypt/hash, the unhashed password was found
+5f4dcc3b5aa765d61d8327deb882cf99:password
+
+Entering password brought us to a new screen with a blank textbox to submit
+Submitting any text gives a ciphertext, and submitting again gives the same message from the ciphertext but encoded with a different cipher key
+
+The first two ciphertext given were
+xef, xoo cd oliu l bxafuy fv pu zvcupvyd lcrvefxaf. buoo yv lf fwua.xef, lc jvlaj fv zxku cvaud zv l yvaf wxku fv jv fwevhjw fwlz xjxla. jeuxf. nhzf yv lf.xef, l yvaf iuuo olgu lku wxy uavhjw fexlalaj. bwxf yv l yv? dvh nhzf yv lf. xef, cd cxaxjue yvaf jlku cu av wuor. bwxf yv l yv? dvh nhzf yv lf. xef, dvh yvaf hayuezfxay. l bxz ce. ukuedfwlaj xf cd ivecue tvcrxad. dvh yvaf cuxa l wxku fv zfxef vii yvba wueu xf fwu pvffvc xay yv lf, yv dvh? dur. dvh euxood jvf fv yv lf. xef, bwxfz fwu relcxed yliiueuatu pufbuua blaauez xay ovzuez fwu blaauez yv lf. fwud yv lf, xay yv lf, xay yv lf, xay yv lf, haflo fwu nvp jufz yvau. xay fwua fwud fxog xpvhf wvb jeuxf lf lz fv wxku ilaxood wxku xtwlukuy zvcufwlaj dvh auuy. xay wvb joxy fwud xeu fwxf fwud ylyaf qhlf olgu ukuedpvyd uozu. xay wvb bvayueiho lf lz fv ilaxood pu zvcupvyd fwudeu revhy vi. xay cxgu x yliiueuatu blfw fwule oliu.
+zlv, zhh by hotp o eznvps vq mp cqbpmqsy obiqlvznv. ephh sq ov vwpn.zlv, ob uqonu vq czdp bqnpy cq o sqnv wzdp vq uq vwlqguw vwoc zuzon. ulpzv. xgcv sq ov.zlv, o sqnv tpph hojp odp wzs pnqguw vlzononu. ewzv sq o sq? yqg xgcv sq ov. zlv, by bznzupl sqnv uodp bp nq wphi. ewzv sq o sq? yqg xgcv sq ov. zlv, yqg sqnv gnsplcvzns. o ezc bl. pdplyvwonu zv by tqlbpl rqbizny. yqg sqnv bpzn o wzdp vq cvzlv qtt sqen wplp zv vwp mqvvqb zns sq ov, sq yqg? ypi. yqg lpzhhy uqv vq sq ov. zlv, ewzvc vwp ilobzly sottplpnrp mpveppn eonnplc zns hqcplc vwp eonnplc sq ov. vwpy sq ov, zns sq ov, zns sq ov, zns sq ov, gnvoh vwp xqm upvc sqnp. zns vwpn vwpy vzhj zmqgv wqe ulpzv ov oc vq wzdp tonzhhy wzdp zrwopdps cqbpvwonu yqg npps. zns wqe uhzs vwpy zlp vwzv vwpy sosnv fgov hojp pdplymqsy phcp. zns wqe eqnspltgh ov oc vq tonzhhy mp cqbpmqsy vwpylp ilqgs qt. zns bzjp z sottplpnrp eovw vwpol hotp.
+
+Using frequency analysis on the latter (the one that starts with zlv, zhh...), the following text was obtained, with the following substituion key (in alphabetical order)
+text = ART, ALL MY LIFE I WANTED TO BE SOMEBODY IMPORTANT. WELL DO IT THEN.ART, IM GOING TO SAVE MONEY SO I DONT HAVE TO GO THROUGH THIS AGAIN. GREAT. JUST DO IT.ART, I DONT FEEL LICE IVE HAD ENOUGH TRAINING. WHAT DO I DO? YOU JUST DO IT. ART, MY MANAGER DONT GIVE ME NO HELP. WHAT DO I DO? YOU JUST DO IT. ART, YOU DONT UNDERSTAND. I WAS MR. EVERYTHING AT MY FORMER KOMPANY. YOU DONT MEAN I HAVE TO START OFF DOWN HERE AT THE BOTTOM AND DO IT, DO YOU? YEP. YOU REALLY GOT TO DO IT. ART, WHATS THE PRIMARY DIFFERENKE BETWEEN WINNERS AND LOSERS THE WINNERS DO IT. THEY DO IT, AND DO IT, AND DO IT, AND DO IT, UNTIL THE JOB GETS DONE. AND THEN THEY TALC ABOUT HOW GREAT IT IS TO HAVE FINALLY HAVE AKHIEVED SOMETHING YOU NEED. AND HOW GLAD THEY ARE THAT THEY DIDNT QUIT LICE EVERYBODY ELSE. AND HOW WONDERFUL IT IS TO FINALLY BE SOMEBODY THEYRE PROUD OF. AND MACE A DIFFERENKE WITH THEIR LIFE.
+key = ZMJSPTUWOXRHBNQIFLCVGDEAYK
+
+Looking at the inaccuracies in the text, the frequency analysis mis-judged the plaintext letters C and K, thus swapping them gave:
+Key = ZMRSPTUWOXJHBNQIFLCVGDEAYK
+message = ART, ALL MY LIFE I WANTED TO BE SOMEBODY IMPORTANT. WELL DO IT THEN.ART, IM GOING TO SAVE MONEY SO I DONT HAVE TO GO THROUGH THIS AGAIN. GREAT. JUST DO IT.ART, I DONT FEEL LIKE IVE HAD ENOUGH TRAINING. WHAT DO I DO? YOU JUST DO IT. ART, MY MANAGER DONT GIVE ME NO HELP. WHAT DO I DO? YOU JUST DO IT. ART, YOU DONT UNDERSTAND. I WAS MR. EVERYTHING AT MY FORMER COMPANY. YOU DONT MEAN I HAVE TO START OFF DOWN HERE AT THE BOTTOM AND DO IT, DO YOU? YEP. YOU REALLY GOT TO DO IT. ART, WHATS THE PRIMARY DIFFERENCE BETWEEN WINNERS AND LOSERS THE WINNERS DO IT. THEY DO IT, AND DO IT, AND DO IT, AND DO IT, UNTIL THE JOB GETS DONE. AND THEN THEY TALK ABOUT HOW GREAT IT IS TO HAVE FINALLY HAVE ACHIEVED SOMETHING YOU NEED. AND HOW GLAD THEY ARE THAT THEY DIDNT QUIT LIKE EVERYBODY ELSE. AND HOW WONDERFUL IT IS TO FINALLY BE SOMEBODY THEYRE PROUD OF. AND MAKE A DIFFERENCE WITH THEIR LIFE.
+
+Entering the message in lower-case and pressing submit gave the flag as a pop-up:
+this-is-the-most-underwhelming-flag-in-the-world
+
+Completed.
