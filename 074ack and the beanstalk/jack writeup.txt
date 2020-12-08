@@ -19,7 +19,7 @@ then for 0<i<number of random numbers needed:
 Added this to the code and compiled with different seed values
 
 Compiling the fixed code with "749799107" as seed makes the given numbers not match up.
-Compiling the fixed code with "074097099107", with the added 0's infront since the J is always stated as "074" as the seed gives 1349211844 as the next value.
+Compiling the fixed code with "74097099107" since "074097099107" is too large for the 32-bit input, with the added 0's infront of the characters since the J is always stated as "074" as the seed gives 1349211844 as the next value.
 
 Inputting this into the nc leads to another message with another set of ordered numbers, as well as a github link to 'untwister.cpp', asking for the seed used to generate those numbers.
 Compiling the code and running it with ./untwister shows that it expects an input file -i with newline separated 32-bit integers.
