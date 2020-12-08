@@ -7,26 +7,6 @@ from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Util.RFC1751 import english_to_key
 
 
-def square_multiply(a,x,n):
-    y = 1
-    x_bits = []
-    # Convert x to binary in list format, starting with MSB
-    x_bits = bin(x)[2:]
-    for i in x_bits:
-        y = (y * y) % n
-        if int(i) == 1:
-            y = (y * a) % n
-    return y
-
-def encrypt_message(m, e, n):
-    c = square_multiply(m, e, n)
-    return c
-    
-def decrypt_message(c, d, n):
-    m = square_multiply(c, d, n)
-    return m
-
-
 # 1. Checking that english private key is correct
 rsa_priv_eng = "rue jilt rain crew use hog ram lois rate cake arm hit par otis ante deny few hum pry meet goad dawn hank home own meld argo buoy use hose rep meld cub dade fay he os gate reid dawn flow hue pry lair dad chub hand his par name dan come flow hood rue gash golf crew hand hen ply meek rare cake lea ha ram otto reid dade lap hey ply loge cub crew halo has rep gash did cave flub holt pry lake did come lam huff per lois aqua cave flow her rue gash rays cake fat huge rue gate day cave flow i pry gwen ames deny bash him per gwen des cake barn hat rep otis ammo chub pet hat rue nair cut cake hank hut ply loge ammo coat us hove rob gash gist cave halt hose rep nair real deny barn haw ply name dan dawn arm hal rue otis cut crew pew hap per hole del chub hang hub rue otto glad come law horn rue otis cub cake foal ham rob nair rain deny hand hem rep meek goad come are holm pry holm coy come are he per jill argo cake flow hone pry gust reek come ding hugh rue lois rate come per hoe pry lois coy cave law her own gush ammo deny flub hulk ply meet goes cake pep hint os lain glow deny halt huh rep meld argo buoy hang hem rep holm reed cake per hoof os meet gist dade lea honk rob nail coy dawn dine ha os gush real dawn carl hop pry holt dan chub care han rob meek dan dade cant hour own jill dad cave dint hut par loge cut coat dint her os otto reed buoy van hob pry holm dan dade arm hut os ouch arch crew lam howl per hole amos crew base hem ram lois rate deny arm hire own five glum buoy are has own lola ante buoy bask hit ply lake ammo chub care hulk rob gush army crew fay holt pry hole reid dawn dime hem ram nair ammo cave us huff rep gust cup chub flue honk pry otis cub dawn fay howe ply ouch ames coat foam guy ram jilt ante dade lay hug own loge dad come fee ha os meld amos deny law hire os gush amos dade pew hem rob meet reek come flow hill per ouch aqua chub per hen par flak ammo coat foal hiss own flag glow buoy foal hoot per holt army chub flub ha ram gate goad cake flue ho pry five ante dawn fed hull own jill day dawn card hub per jill glad dawn hank he ply meek glum cave pep holt"
 rsa_priv_eng = rsa_priv_eng.upper()
