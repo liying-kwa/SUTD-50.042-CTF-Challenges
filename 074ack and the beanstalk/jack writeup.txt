@@ -1,0 +1,29 @@
+nc 18.216.241.207 80 leads to a prompt with 100 numbers given in order and 2 hints:
+1) "Jack" is the ASCII seed value
+2) a github link to a mt19937.cpp C++ file.
+
+For 1), it was noted that "Jack" was spelled 074ack in both the header of the message as well as the challenge submission.
+"Jack" in ASCII is 74 97 99 107
+
+
+For 2), only one .cpp file is included called mt19937.cpp. Google-ing mt19937 leads to a random number generator implementation in C++.
+The code is missing a section in main indicated with /*codehere*/
+
+Looking at example code for mt19937 online and looking at what parts of the code is actually implemented (without TODOs), it looks like it needs the following code to work:
+
+Mt19937 <objectname>
+<objectname>.seed(seed)
+then for 0<i<number of random numbers needed:
+	std::cout << <objectname>.random() + "\n"
+
+Added this to the code and compiled with different seed values
+
+Compiling the fixed code with "749799107" as seed makes the given numbers not match up.
+Compiling the fixed code with "074097099107", with the added 0's infront since the J is always stated as "074" as the seed gives 1349211844 as the next value.
+
+Inputting this into the nc leads to another message with another set of ordered numbers, as well as a github link to 'untwister.cpp', asking for the seed used to generate those numbers.
+Compiling the code and running it with ./untwister shows that it expects an input file -i with newline separated 32-bit integers.
+Rearranging the given numbers nicely and running ./untwister -i random2.txt -r mt19937 gives the seed 61
+Inputting 61 to the terminal gives the flag
+CTF{portalFunSoRandom}
+
