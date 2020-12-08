@@ -1,0 +1,58 @@
+We were given the following chat logs:
+
+*** CHAT LOGS ***
+
+Pink: Found red dead in elec
+Blue: Any sus?
+Pink: I saw white leaving elec when I entered
+1a1a1b1e4c1c555525480c520e1e010d11015359061b001345094a0803080d4b434f221a491717
+180a0d54002e071c0645
+Green: White is safe
+Green: I saw white scan at medbay
+Blue: Pink saw me do trash
+Pink: Yep
+White: You can watch me do trash after this
+White: Might be self report
+Green: Fr I also saw pink shooting asteroids in weapons
+Brown: I think self report
+Orange: Pink sus
+Yellow: Vote pink
+180a0d54002000005247160b16570c131145004f490a550c42
+1a1a1b1e4c1c55553a410b130d164d0613
+Pink: Wait no vote for white
+Blue: Bye pink
+*Pink was ejected
+
+*** END LOGS ***
+
+We could then recognise that there were four messages being sent (encoded in hex):
+
+msg1 -> 1a1a1b1e4c1c555525480c520e1e010d11015359061b001345094a0803080d4b434f221a491717
+msg2 -> 180a0d54002e071c0645
+msg3 -> 180a0d54002000005247160b16570c131145004f490a550c42
+msg4 -> 1a1a1b1e4c1c55553a410b130d164d0613
+
+We realised that the crib-drag method could be used to solve for the plaintext. The idea is that if the same OTP is used to encrypt two messages, then taking the XOR
+of the two ciphertexts would give us the XOR result between the two plaintexts. We could then choose words that we believed were in one of the two plaintexts, and 
+XOR that with the XOR result between the plaintexts. We started to XOR our chosen word from position, and checked if there was a human-readable (that made sense) result.
+If there was, we would mark that word at that position for the first message, and the result at that position for the second message.
+If no human-readable result was found, we then shift the XOR by one position, and try again.
+
+We tried this process with all four messages.
+
+We tried to implement our own Crib-Drag solver, but ultimately we found an online tool that could obtain the same result:
+https://lzutao.github.io/cribdrag/
+
+Using the online tool, we decrypted the four messages to be as follows (in order):
+msg1 -> Purple: Who killed you re
+msg2 -> Red: White
+msg3 -> Red: You guys are so dumb
+msg4 -> Purple: hahaha gg
+
+From this, we know that White is one of the imposters.
+
+Finding the other imposter was just a matter of inference from the chat logs. We can see that Green clearly states that White is safe, and that he
+saw White scan at medbay (which is a visual task). This cannot be the case if White is the imposter. Hence, Green is the other imposter.
+
+
+FLAG: CTF{GREENandWHITE}
