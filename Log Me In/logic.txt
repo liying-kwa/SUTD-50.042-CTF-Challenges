@@ -1,0 +1,80 @@
+message = "username=any_username, password=any_password, admin=1"
+len(message) = 53
+1 ascii character -> 8 bits
+total bits = 53 * 8 = 424
+"1" is position 52; byte 52.
+
+==16 byte chunks==
+username=any_use
+rname, password=
+any_password, ad
+min=1
+==================
+
+Target block at block 4
+
+=========================================
+Encyrpted Message:
+GU55eFAvu6pvaOI3SkqiVGsXuuVyqZo9cA/Y9KfPHiN2BxOMisSDMdMyGlpu3vlum7ewB0d1q4nF5D/5+uXGIkPTyXa1iDBkAocqoNULcjM=
+len(encryptedmsg) = 108
+It's b64 encoded.
+1 b64 character -> 6 bits
+total bits = 108 * 6 = 648
+
+=========================================
+AES
+block cipher of block length = 128 bits, but its encoded in b64.
+1 char = 6 bits.
+Chunking the cipher text...
+                                                                        Byte# 
+00011001 01001110 01111001 01111000 01010000 00101111 10111011 10101010 8
+01101111 01101000 11100010 00110111 01001010 01001010 10100010 01010100 16
+01101011 00010111 10111010 11100101 01110010 10101001 10011010 00111101 24
+01110000 00001111 11011000 11110100 10100111 11001111 00011110 00100011 32
+01110110 00000111 00010011 10001100 10001010 11000100 10000011 00110001 40
+11010011 00110010 00011010 01011010 01101110 11011110 11111001 01101110 48
+10011011 10110111 10110000 00000111 01000111 01110101 10101011 10001001 56
+11000101 11100100 00111111 11111001 11111010 11100101 11000110 00100010 64
+01000011 11010011 11001001 01110110 10110101 10001000 00110000 01100100 72
+00000010 10000111 00101010 10100000 11010101 00001011 01110010 00110011 80
+
+
+00011001 01001110 01111001 01111000 01010000 00101111 10111011 10101010
+01101111 01101000 11100010 00110111 01001010 01001010 10100010 01010100 
+01101011 00010111 10111010 11100101 01110010 10101001 10011010 00111101 
+01110000 00001111 11011000 11110100 10100111 11001111 00011110 00100011 
+01110110 00000111 00010011 10001100 10001010 11000100 10000011 00110001 
+11010011 00110010 00011010 01011010 01101110 11011110 11111001 01101110 
+10011011 10110111 10110000 00000111 01000111 01110101 10101011 10001001 
+11000101 11100100 00111111 11111001 11111010 11100101 11000110 00100010 
+01000011 11010011 11001001 01110110 10110101 10001000 00110000 01100100 
+00000010 10000111 00101010 10100000 11010101 00001011 01110010 00110011 
+
+Say we use block size = 8
+==Encrypt==
+Ciphertext1 = Plaintext1
+Ciphertext2 = Encrypt(Plaintext1 XOR Ciphertext2)
+Ciphertext3 = Encrypt(Plaintext2 XOR Ciphertext3)
+Ciphertext4 = Encrypt(Plaintext1 XOR Ciphertext4)
+Ciphertext5 = Encrypt(Plaintext1 XOR Ciphertext5)
+Ciphertext6 = Encrypt(Plaintext1 XOR Ciphertext6)
+Ciphertext7 = Encrypt(Plaintext1 XOR Ciphertext7)
+Ciphertext8 = Encrypt(Plaintext1 XOR Ciphertext8)
+Ciphertext9 = Encrypt(Plaintext1 XOR Ciphertext9)
+Ciphertext10 = Encrypt(Plaintext1 XOR Ciphertex10)
+
+
+==Decrypt==
+Plaintexttext1 = Plaintext1
+Plaintexttext2 = Decrypt(Ciphertext2 XOR Ciphertext2)
+Plaintexttext3 = Decrypt(Ciphertext3 XOR Ciphertext3)
+Plaintexttext4 = Decrypt(Ciphertext4 XOR Ciphertext4)
+Plaintexttext5 = Decrypt(Ciphertext5 XOR Ciphertext5)
+Plaintexttext6 = Decrypt(Ciphertext6 XOR Ciphertext6)
+Plaintexttext7 = Decrypt(Ciphertext7 XOR Ciphertext7)
+Plaintexttext8 = Decrypt(Ciphertext8 XOR Ciphertext8)
+Plaintexttext9 = Decrypt(Ciphertext9 XOR Ciphertext9)
+Plaintexttext10 = Decrypt(Ciphertext10 XOR Ciphertex10)
+
+
+==========================================
