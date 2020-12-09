@@ -48,8 +48,8 @@ for letter in ciphertext:
 print(midtext)
 
 
-# 3. Do transposition. See solution.txt
+# 3. See solution.txt
 
-# 4. Decrypt image using key from previous part to get flag.
+# 4. Decrypt image using key from previous part to get flag. See solution.txt.
 
 

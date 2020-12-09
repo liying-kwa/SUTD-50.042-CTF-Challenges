@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# Author : Wong Tin Kit
-# Student ID : 1003331
-# Present skeleton file for 50.042 FCS
 
+# 50.042 FCS Lab 4: Block Cipher
+# Section 3: Implementing PRESENT
+# Student: Kwa Li Ying (1003833)
 
 # constants
 FULLROUND = 31
@@ -33,77 +33,73 @@ def ror(val, r_bits, max_bits): return \
 
 
 def genRoundKeys(key):
-    # globals sbox
-    roundKeys = [] 
-    roundKeys.append(32) # first round in yr dictionary has 32, which is not possible.
+    # Hardcode 0th key = 32
+    keys = {0: 32}
+    K = key
+    # For each i = 1 to 32, compute round key and update K
     for i in range(1, 33):
-        # extract round key 
-        roundKey = key >> 16 
-        roundKeys.append(roundKey)
-        
-        # update Key Register, key
-        # 1. [K79 K78 K77.... K0] = [K18 K17 .... K19]
-        key = rol(key, 61, 80)
+    	# Compute round key (leftmost 64 bits of K)
+    	roundkey = K >> (80-64)
+    	keys[i] = roundkey
+    	# Step 1: Rotate K by 61 bit positions to the left
+    	K = rol(K, 61, 80)
+    	# Step 2: Parse leftmost 4 bits through S-box
+    	k79to76 = K >> (80-4)
+    	k79to76 = sbox[k79to76]
+    	K =  (k79to76 << (80-4)) | (K % 2**76)
+    	# Step 3: XOR round counter value i with k19 to k15
+    	k19to15 = (K % 2**20) >> 15
+    	k19to15 = k19to15 ^ i
+    	K = ((K >> 20) << 20) | (k19to15 << 15) | (K % 2**15)
+    return keys
 
-        # 2. [K79 K78 K76K76] = S[K79 K78 K77 K76]
-        key = (sbox[key >> 76] << 76) + (key & (2 ** 76 - 1)) # rebuild key 
-        
-        # 3. [K19 K18 K17 K16 K15] = [K19 K18 K17K16 K15] XOR round_counter 
-        # easier to pad on the left with 0s than to specifically get the 
-        key = key ^ (i << 15) 
 
-    return roundKeys
-
-    
 def addRoundKey(state, Ki):
-    return state ^ Ki
+    state = state ^ Ki
+    return state
 
-def sBoxLayer(state, mode):
-    global sbox
-    placeholder = []
-    if mode == 'e':
-        placeholder = sbox
-    elif mode == 'd':
-        placeholder = [sbox.index(x) for x in range(len(sbox))]
 
-    result = 0
+def sBoxLayer(state):
+    new_state = 0
     for i in range(16):
-        # 4 bits each time starting from LSB on right
-        # 15 -> 1111  
-        word = ( state >> (i * 4) ) & 15
-        result += (placeholder[word] << (i * 4)) # rebuilding state
-    return result
+    	w = (state >> (4*i)) % 2**4
+    	w = sbox[w]
+    	new_state += (w << (4*i))
+    return new_state
 
+def sBoxLayer_inv(state):
+    new_state = 0
+    for i in range(16):
+    	w = (state >> (4*i)) % 2**4
+    	w = sbox.index(w)
+    	new_state += (w << (4*i))
+    return new_state
 
-def pLayer(state, mode):
-    # mode either 'e' or 'd' for encrypt or decrypt
-    global pmt
-    placeholder = []
-    if mode == 'e':
-        placeholder = pmt
-    elif mode == 'd': 
-        placeholder = [pmt.index(x) for x in range(len(pmt))]
-    
-    
-    answer = 0
+def pLayer(state):
+    new_state = 0
     for i in range(64):
-        # LSB of index i << pmt[i]
-        # add this to placeholder answer
-        answer += ((state >> i) & 0x01) << placeholder[i] 
-    return answer
+    	bit = (state >> i) & 1
+    	new_state += bit << pmt[i]
+    return new_state
 
+def pLayer_inv(state):
+    new_state = 0
+    for i in range(64):
+    	bit = (state >> pmt[i]) & 1
+    	new_state += bit << i
+    return new_state
 
 def present_round(state, roundKey):
     state = addRoundKey(state, roundKey)
-    state = sBoxLayer(state, 'e')
-    state = pLayer(state, 'e')
+    state = sBoxLayer(state)
+    state = pLayer(state)
     return state
 
 
 def present_inv_round(state, roundKey):
+    state = pLayer_inv(state)
+    state = sBoxLayer_inv(state)
     state = addRoundKey(state, roundKey)
-    state = pLayer(state, 'd')
-    state = sBoxLayer(state, 'd')
     return state
 
 
@@ -119,11 +115,10 @@ def present(plain, key):
 def present_inv(cipher, key):
     K = genRoundKeys(key)
     state = cipher
-    for i in range(FULLROUND+1, 1, -1):
-        state = present_inv_round(state, K[i]) # applying key in reverse
-    state = addRoundKey(state, K[1])
+    state = addRoundKey(state, K[32])
+    for i in range(FULLROUND, 0, -1):
+        state = present_inv_round(state, K[i])
     return state
-
 
 if __name__ == "__main__":
     # Testvector for key schedule
@@ -154,7 +149,7 @@ if __name__ == "__main__":
     plain22 = present_inv_round(round2, key1)
     assert round1 == plain22
     plain33 = present_inv_round(round3, key1)
-    # assert round2 == plain33
+    assert round2 == plain33
     
     # Everything together
     plain1 = 0x0000000000000000
