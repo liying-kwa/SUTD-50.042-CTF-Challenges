@@ -1,0 +1,17 @@
+Given  a string of Emojis, we first find its unicode-escape sequence. The result is: 
+\U0001f604\U0001f601 \U0001f603\U0001f600 \U0001f612\U0001f600 \U0001f639\U0001f600 \U0001f601\U0001f600 \U0001f607\U0001f600 \U0001f605\U0001f602 \U0001f636\U0001f603 \U0001f637\U0001f601 \U0001f603\U0001f600 \U0001f640\U0001f600
+
+The 2nd and 3rd Hints points us to some form of pattern recognition. 
+2nd Hint : 602 601 => (50.002) Computation Structures
+
+So we can process the unicode-escape sequence into the input sequence as in the 2nd Hint and we get:
+604601 603600 612600 639600 601600 607600 605602 636603 637601 603600 640600
+
+Using 2nd Hint as a reference, we get the hidden message: tentimesten
+Following the instructions from the Telegram Bot, the actual input answer is 100
+
+Then we are given a .ppm where the size of the file is removed. Playing around with the columns and width, we get 100 100 as the appropriate dimensions.
+Scanning the QR code leads us to the flag: ctf{red_team_has_the_flag}
+
+Challenge Completed. 
+ 
