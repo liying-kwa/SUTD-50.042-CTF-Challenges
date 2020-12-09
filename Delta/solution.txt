@@ -1,0 +1,44 @@
+
+
+1. Find b in DHKE protocol (optional)
+- Optional because shared key can still be found using B^a = A^b
+- See code implementation in solution.py
+
+
+2. Figure out 80 bit key for present
+- Is actually the key found in the previous part
+- Confirmed to be 80 bits with key.bit_length()
+- Write to key file 'key.txt'
+
+
+3. Decrypt the encrypted conversation
+- Decrypt the conversation using ecb.py and present.py from Lab 4
+- The decrypted message is as shown:
+
+=========================================================
+Alice: NOW OUR CONVERSATION IS ENCRYPTED
+Bob: YES *EVIL LAUGH*
+Bob: Hey, wanna hear a secret?
+Alice: What is it?
+Bob: “KNKQIVCCFOFOXPGLNSADFABIASTS-FDP(1985)”
+Alice: Did we encrypt it?
+Bob: Yes we did, don’t forget.
+Alice: Anyways... I am hungry
+Bob: CAKEISGOOD
+Alice: Ah yes, CAKEISGOOD indeed. Let us end our totally meaningful confidential conversation here
+Bob: Ok. See you!
+===========================================================
+
+
+4. Decrypt the code
+- “KNKQIVCCFOFOXPGLNSADFABIASTS-FDP(1985)” is the code
+- Ignore the (1985)
+- CAKEISGOOD is in capital letters, so probably the key to the cipher
+- Cipher used is learnt in week 1, Vigenere cipher takes in a plaintext and word key and outputs a ciphertext in same english letters
+- Decrypt using Vigenere cipher, using CAKEISGOOD as key
+- ANSWER: INAMADWORLDONLYTHEMADARESANE-RAN(1985)
+
+
+5. Feed into the website to get the flag
+- Website at https://awesome-benz-e0c3bb.netlify.app/ 
+- FLAG: CTF{A1ltH3w0rLds45Ta63}

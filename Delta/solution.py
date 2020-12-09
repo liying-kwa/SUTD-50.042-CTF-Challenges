@@ -30,11 +30,11 @@ for i in range(100, 151):
 # 2. Use b to figure out 80 bit key for present
 key = square_multiply(A, b, p)
 #print(key.bit_length())
+#print(key)
+#print(hex(key))
+with open('key.txt', 'w') as f:
+    f.write(hex(key))
 
 
 # 3. Decrypt encrypted conversation
-ciphertext = open('encryptedConvo', 'rb').read()
-cipher = int.from_bytes(ciphertext, 'big')
-plaintext = present_inv(cipher, key)
-msg = plaintext.to_bytes((plaintext.bit_length() + 7) // 8, 'big').decode('utf-8')
-print(msg)
+# ecb.py -i encryptedConvo -o decryptedConvo.txt -k key.txt -m D
