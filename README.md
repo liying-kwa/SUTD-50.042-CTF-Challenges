@@ -8,12 +8,12 @@
 [5] LAZE\
 [6] Two cats in one house\
 [7] Alice-Bob-Eve CTF Challenge\
-[8] Emoji Hunt\
+[8] Emoji Hunt
 
 
 === **Partially Completed Challenges** ===\
 [1] H4CKz\
-[2] Log Me In\
+[2] Log Me In
 
 
 === **Description** ===\
